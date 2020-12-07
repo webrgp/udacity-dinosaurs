@@ -117,6 +117,10 @@ p {
 }
 
 /* Form Styles */
+form.hide {
+  display: none;
+}
+
 .form-container {
   background: #eee;
   padding: 1.3em;

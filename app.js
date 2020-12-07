@@ -108,15 +108,15 @@ let app = (function() {
     }, {})
   }
 
-  function _deleteForm() {
-    formElem.remove()
+  function _toggleFormVisibility() {
+    formElem.classList.toggle("hide");
   }
 
   function _initEventListeners() {
     formElem.addEventListener('submit', function(event){
       event.preventDefault();
       const formData = _formToObj(formElem.elements)
-      _deleteForm()
+      _toggleFormVisibility()
       console.log(formData);
     })
   }
@@ -158,8 +158,6 @@ app.init()
 // Generate Tiles for each Dino in Array
 
     // Add tiles to DOM
-
-// Remove form from screen
 
 
 // On button click, prepare and display infographic
