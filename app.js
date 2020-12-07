@@ -119,6 +119,11 @@ let app = (function() {
     }
   }
 
+  function _shuffle(array) {
+    array.sort(function() { return Math.random() - 0.5 });
+  }
+
+
   function _formToObj(elements) {
     return [].reduce.call(elements, function(data, element) {
       data[element.name] = element.value
@@ -135,7 +140,9 @@ let app = (function() {
       event.preventDefault();
       const formData = _formToObj(formElem.elements)
       _toggleFormVisibility()
-      console.log(formData);
+      _shuffle(dinos)
+      // console.log(formData);
+      // console.log(dinos);
     })
   }
 
