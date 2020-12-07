@@ -62,8 +62,8 @@ let app = (function() {
         const gridItem = document.createElement('div')
         gridItem.classList.add('grid-item');
         gridItem.innerHTML = `
-          <h3>NAME</h3>
-          <img src="iamges/human.png" alt="human"/>
+          <h3>SPECIES</h3>
+          <img src="iamges/anklyosaurus.png" alt="human"/>
           <p>FACT</p>
         `
       }
@@ -77,6 +77,15 @@ let app = (function() {
       height: height,
       weight: weight,
       diet: diet,
+      generateTile: function() {
+        const gridItem = document.createElement('div')
+        gridItem.classList.add('grid-item');
+        gridItem.innerHTML = `
+          <h3>NAME</h3>
+          <img src="iamges/human.png" alt="human"/>
+          <p>FACT</p>
+        `
+      }
     })
   }
 
