@@ -21,6 +21,13 @@ let app = (function() {
 			where: where,
 			when: when,
       fact: fact,
+      compareDiet: function(human) {
+        if (this.diet === human.diet) {
+          return `${this.species} had the same diet as you.`;
+        }
+
+        return `${this.species} had a different diet from you.`;
+      },
       compareHeight: function(human) {
         const diff = this.height - human.height
         if (diff === 0) {
@@ -33,6 +40,20 @@ let app = (function() {
 
         if (diff < 0) {
           return `You are taller than ${this.species}`
+        }
+      },
+      compareWeight: function(human) {
+        const diff = this.weight - human.weight
+        if (diff === 0) {
+          return `You are the same weight as ${this.species}`
+        }
+
+        if (diff > 0) {
+          return `You are lighter than ${this.species}`
+        }
+
+        if (diff < 0) {
+          return `You are heavier than ${this.species}`
         }
       }
 		})
