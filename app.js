@@ -1,7 +1,7 @@
 let app = (function() {
 
   // UI
-  const form = document.getElementById('dino-compare');
+  const formElem = document.getElementById('dino-compare');
 
   let dinos = []
 
@@ -78,16 +78,26 @@ let app = (function() {
     }
   }
 
+  function _formToObj(elements) {
+    return [].reduce.call(elements, function(data, element) {
+      data[element.name] = element.value
+      return data
+    }, {})
+  }
+
   function _initEventListeners() {
-    form.addEventListener('submit', function(event){
-      console.log(`Form Submitted! Time stamp: ${event.timeStamp}`);
+    formElem.addEventListener('submit', function(event){
       event.preventDefault();
+      const formData = _formToObj(formElem.elements)
+      console.log(formData);
     })
   }
 
   async function init() {
     console.log('Initialize application')
+    // load dinos
     await _loadDinos()
+    // initialize event listeners
     _initEventListeners()
   }
 
