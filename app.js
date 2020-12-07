@@ -17,8 +17,8 @@ let app = (function() {
   function _dinoFactory(species, weight, height, diet, where, when, fact) {
     return Object.assign({}, basicAnimal, {
 			species: species,
-			weight: weight,
-			height: height,
+			weight: weight, // in lbs
+			height: height, // in inches
 			diet: diet,
 			where: where,
 			when: when,
@@ -58,14 +58,21 @@ let app = (function() {
           return `You are heavier than ${this.species}`
         }
       },
+      getRandomFact: function() {
+        if (this.species === 'Pigeon') {
+          return this.fact
+        }
+        return 'FACT'
+      },
       generateTile: function() {
         const gridItem = document.createElement('div')
         gridItem.classList.add('grid-item');
         gridItem.innerHTML = `
-          <h3>SPECIES</h3>
-          <img src="iamges/anklyosaurus.png" alt="human"/>
-          <p>FACT</p>
+          <h3>${this.species}</h3>
+          <img src="images/${this.species}.png" alt="${this.species}"/>
+          <p>${this.getRandomFact()}</p>
         `
+        return gridItem
       }
 		})
   }
@@ -74,17 +81,17 @@ let app = (function() {
   function _humanFactory (name, height, weight, diet) {
     return Object.assign({}, basicAnimal, {
       name: name,
-      height: height,
-      weight: weight,
+      weight: weight, // in lbs
+      height: height, // in inches
       diet: diet,
-      generateTile: function() {
+      generateTile: function(human) {
         const gridItem = document.createElement('div')
         gridItem.classList.add('grid-item');
         gridItem.innerHTML = `
-          <h3>NAME</h3>
-          <img src="iamges/human.png" alt="human"/>
-          <p>FACT</p>
+          <h3>${this.name}</h3>
+          <img src="images/human.png" alt="human"/>
         `
+        return gridItem
       }
     })
   }
@@ -138,11 +145,31 @@ let app = (function() {
   function _initEventListeners() {
     formElem.addEventListener('submit', function(event){
       event.preventDefault();
+
       const formData = _formToObj(formElem.elements)
+
+      const human = _humanFactory(
+        formData.name,
+        (formData.feet * 12 + formData.inches),
+        formData.weight,
+        formData.diet,
+      )
+
       _toggleFormVisibility()
-      _shuffle(dinos)
-      // console.log(formData);
-      // console.log(dinos);
+
+      _generateGrid(human)
+    })
+  }
+
+  function _generateGrid(human) {
+    _shuffle(dinos)
+
+    // Create array with human in the center
+    const items = dinos.slice() // clone array
+    items.splice(dinos.length / 2, 0, human)
+
+    items.forEach(function(item){
+      gridElem.append(item.generateTile(human))
     })
   }
 
@@ -161,28 +188,3 @@ let app = (function() {
 }())
 
 app.init()
-
-
-// Create Human Object
-
-// Use IIFE to get human data from form
-
-
-// Create Dino Compare Method 1
-// NOTE: Weight in JSON file is in lbs, height in inches.
-
-
-// Create Dino Compare Method 2
-// NOTE: Weight in JSON file is in lbs, height in inches.
-
-
-// Create Dino Compare Method 3
-// NOTE: Weight in JSON file is in lbs, height in inches.
-
-
-// Generate Tiles for each Dino in Array
-
-    // Add tiles to DOM
-
-
-// On button click, prepare and display infographic
