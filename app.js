@@ -58,19 +58,39 @@ let app = (function() {
           return `You are heavier than ${this.species}`
         }
       },
-      getRandomFact: function() {
+      getRandomFact: function(human) {
         if (this.species === 'Pigeon') {
           return this.fact
         }
-        return 'FACT'
+
+        const randomFact = Math.floor(Math.random() * 4 + 1)
+
+        switch (randomFact) {
+          case 1:
+            return this.compareDiet(human)
+            break;
+          case 2:
+            return this.compareHeight(human)
+            break;
+          case 3:
+            return this.compareWeight(human)
+            break;
+          case 4:
+            return this.fact
+            break;
+
+          default:
+            return this.fact
+            break;
+        }
       },
-      generateTile: function() {
+      generateTile: function(human) {
         const gridItem = document.createElement('div')
         gridItem.classList.add('grid-item');
         gridItem.innerHTML = `
           <h3>${this.species}</h3>
           <img src="images/${this.species}.png" alt="${this.species}"/>
-          <p>${this.getRandomFact()}</p>
+          <p>${this.getRandomFact(human)}</p>
         `
         return gridItem
       }
@@ -88,7 +108,7 @@ let app = (function() {
         const gridItem = document.createElement('div')
         gridItem.classList.add('grid-item');
         gridItem.innerHTML = `
-          <h3>${this.name}</h3>
+          <h3>${human.name}</h3>
           <img src="images/human.png" alt="human"/>
         `
         return gridItem
