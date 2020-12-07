@@ -2,7 +2,9 @@ let app = (function() {
 
   // UI
   const formElem = document.getElementById('dino-compare');
+  const gridElem = document.getElementById('grid');
 
+  // Global
   let dinos = []
 
   const basicAnimal = {
@@ -65,7 +67,7 @@ let app = (function() {
       name: name,
       height: height,
       weight: weight,
-      diet: diet
+      diet: diet,
     })
   }
 
@@ -106,10 +108,15 @@ let app = (function() {
     }, {})
   }
 
+  function _deleteForm() {
+    formElem.remove()
+  }
+
   function _initEventListeners() {
     formElem.addEventListener('submit', function(event){
       event.preventDefault();
       const formData = _formToObj(formElem.elements)
+      _deleteForm()
       console.log(formData);
     })
   }
