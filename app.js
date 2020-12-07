@@ -57,6 +57,15 @@ let app = (function() {
         if (diff < 0) {
           return `You are heavier than ${this.species}`
         }
+      },
+      generateTile: function() {
+        const gridItem = document.createElement('div')
+        gridItem.classList.add('grid-item');
+        gridItem.innerHTML = `
+          <h3>NAME</h3>
+          <img src="iamges/human.png" alt="human"/>
+          <p>FACT</p>
+        `
       }
 		})
   }
