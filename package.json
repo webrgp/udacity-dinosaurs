@@ -1,0 +1,14 @@
+{
+  "name": "Dinosaurs",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/webrgp/udacity-dinosaurs.git",
+  "author": "Rodrigo Passos <rodrigo@hellodative.com>",
+  "license": "MIT",
+  "dependencies": {
+    "serve": "^11.3.2"
+  },
+  "scripts": {
+    "start": "npx serve"
+  }
+}
